@@ -1,7 +1,7 @@
 <?php
 // Controlador para el modelo ItemModel (puede haber más controladores en la aplicación)
 // Un controlador no tiene porque estar asociado a un objeto del modelo
-class ItemController
+class CategoriaController
 {
     // Atributo con el motor de plantillas del microframework
     protected $view;
@@ -13,14 +13,14 @@ class ItemController
         $this->view = new View();
     }
 
-    // Método del controlador para listar los items almacenados
+    // Método del controlador para listar las categorias almacenadas
     public function listar()
     {
         //Incluye el modelo que corresponde
-        require 'models/ItemModel.php';
+        require 'models/categoriaModel.php';
 
         //Creamos una instancia de nuestro "modelo"
-        $items = new ItemModel();
+        $items = new CategoriaModel();
 
         //Le pedimos al modelo todos los items
         $listado = $items->getAll();
@@ -31,17 +31,17 @@ class ItemController
         // Finalmente presentamos nuestra plantilla 
         // Llamamos al método "show" de la clase View, que es el motor de plantillas
         // Genera la vista de respuesta a partir de la plantilla y de los datos
-        $this->view->show("listarView.php", $data);
+        $this->view->show("listarCategoriaView.php", $data);
     }
 
 
     public function index()
     {
         //Incluye el modelo que corresponde
-        require_once 'models/ItemModel.php';
+        require_once 'models/categoriaModel.php';
 
         //Creamos una instancia de nuestro "modelo"
-        $items = new ItemModel();
+        $items = new CategoriaModel();
 
         //Le pedimos al modelo todos los items
         $listado = $items->getAll();
@@ -50,32 +50,32 @@ class ItemController
         $data['items'] = $listado;
 
         //Finalmente presentamos nuestra plantilla
-        $this->view->show("listarView.php", $data);
+        $this->view->show("listarCategoriaView.php", $data);
     }
 
     // Método del controlador para crear un nuevo item
     public function nuevo()
     {
-        require 'models/ItemModel.php';
-        $item = new ItemModel();
+        require 'models/categoriaModel.php';
+        $item = new CategoriaModel();
 
         $errores = array();
 
         // Si recibe por GET o POST el objeto y lo guarda en la BG
         if (isset($_REQUEST['submit'])) {
-            if (!isset($_REQUEST['item']) || empty($_REQUEST['item']))
-                $errores['item'] = "* Item: Error";
+            if (!isset($_REQUEST['cat_nombre']) || empty($_REQUEST['cat_nombre']))
+                $errores['categoria'] = "* categoria: Error";
             if (empty($errores)) {
-                $item->setItem($_REQUEST['item']);
+                $item->setCat_nombre($_REQUEST['cat_nombre']);
                 $item->save();
 
                 // Finalmente llama al método listar para que devuelva vista con listado
-                header("Location: index.php?controlador=item&accion=listar");
+                header("Location: index.php?controlador=Categoria&accion=listar");
             }
         }
 
         // Si no recibe el item para añadir, devuelve la vista para añadir un nuevo item
-        $this->view->show("nuevoView.php", array('errores' => $errores));
+        $this->view->show("nuevaCategoriaView.php", array('errores' => $errores));
 
 
 
@@ -85,11 +85,11 @@ class ItemController
     public function editar()
     {
 
-        require 'models/ItemModel.php';
-        $items = new ItemModel();
+        require 'models/categoriaModel.php';
+        $items = new CategoriaModel();
 
         // Recuperar el item con el código recibido
-        $item = $items->getById($_REQUEST['codigo']);
+        $item = $items->getById($_REQUEST['cat_id']);
 
         if ($item == null) {
             $this->view->show("errorView.php", array('error' => 'No existe codigo'));
@@ -100,45 +100,70 @@ class ItemController
         // Si se ha pulsado el botón de actualizar
         if (isset($_REQUEST['submit'])) {
 
-            if (!isset($_REQUEST['item']) || empty($_REQUEST['item']))
-                $errores['item'] = "* Item: Error";
+            if (!isset($_REQUEST['cat_nombre']) || empty($_REQUEST['cat_nombre']))
+                $errores['categoria'] = "* categoria: Error";
 
             if (empty($errores)) {
                 // Cambia el valor del item y lo guarda en BD
-                $item->setItem($_REQUEST['item']);
+                $item->setCat_nombre($_REQUEST['cat_nombre']);
                 $item->save();
 
                 // Reenvía a la aplicación a la lista de items
-                header("Location: index.php?controlador=item&accion=listar");
+                header("Location: index.php?controlador=Categoria&accion=listar");
             }
+        }
+        if (isset($_REQUEST['cancelar'])) {
+            header("Location: index.php");
         }
 
         // Si no se ha pulsado el botón de actualizar se carga la vista para editar el item
-        $this->view->show("editarView.php", array('item' => $item, 'errores' => $errores));
+        $this->view->show("editarCategoriaView.php", array('item' => $item, 'errores' => $errores));
 
 
 
     }
 
     // Método para borrar un item 
+    
+
     public function borrar()
     {
-        //Incluye el modelo que corresponde
-        require_once 'models/ItemModel.php';
 
-        //Creamos una instancia de nuestro "modelo"
-        $items = new ItemModel();
+        require 'models/categoriaModel.php';
+        $items = new CategoriaModel();
 
-        // Recupera el item con el código recibido por GET o por POST
-        $item = $items->getById($_REQUEST['codigo']);
+        // Recuperar el item con el código recibido
+        $item = $items->getById($_REQUEST['cat_id']);
 
         if ($item == null) {
             $this->view->show("errorView.php", array('error' => 'No existe codigo'));
-        } else {
-            // Si existe lo elimina de la base de datos y vuelve al inicio de la aplicación
-            $item->delete();
+        }
+
+        $errores = array();
+
+        // Si se ha pulsado el botón de actualizar
+        if (isset($_REQUEST['submit'])) {
+
+            if (!isset($_REQUEST['cat_nombre']) || empty($_REQUEST['cat_nombre']))
+                $errores['categoria'] = "* categoria: Error";
+
+            if (empty($errores)) {
+                // Cambia el valor del item y lo guarda en BD
+                $item->delete();
+
+                // Reenvía a la aplicación a la lista de items
+                header("Location: index.php?controlador=Categoria&accion=listar");
+            }
+        }
+        if (isset($_REQUEST['cancelar'])) {
             header("Location: index.php");
         }
+
+        // Si no se ha pulsado el botón de actualizar se carga la vista para editar el item
+        $this->view->show("eliminarCategoriaView.php", array('item' => $item, 'errores' => $errores));
+
+
+
     }
 
 }
