@@ -19,7 +19,7 @@ class FrontController
             if (!empty($_GET['controlador']))
                   $controllerName = $_GET['controlador'] . 'Controller';
             else
-                  $controllerName = "ArticuloController";
+                  $controllerName = "ItemController";
 
             //Lo mismo sucede con las acciones, si no hay acción, tomamos index como acción
             if (!empty($_GET['accion']))
