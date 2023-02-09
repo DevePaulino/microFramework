@@ -12,7 +12,7 @@
 
 	<form action="index.php">
 
-		<input type="hidden" name="controlador" value="item">
+		<input type="hidden" name="controlador" value="Item">
 		<input type="hidden" name="accion" value="editar">
 
 		<label for="codigo">Codigo</label>
