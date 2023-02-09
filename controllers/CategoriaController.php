@@ -17,7 +17,7 @@ class CategoriaController
     public function listar()
     {
         //Incluye el modelo que corresponde
-        require 'models/categoriaModel.php';
+        require 'models/CategoriaModel.php';
 
         //Creamos una instancia de nuestro "modelo"
         $items = new CategoriaModel();

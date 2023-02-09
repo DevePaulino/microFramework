@@ -37,7 +37,7 @@ class ArticuloController
     public function index()
     {
         //Incluye el modelo que corresponde
-        require_once 'models/articuloModel.php';
+        require_once 'models/ArticuloModel.php';
 
         //Creamos una instancia de nuestro "modelo"
         $items = new ArticuloModel();
