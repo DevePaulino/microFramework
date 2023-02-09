@@ -55,7 +55,7 @@ class ArticuloController
     // Método del controlador para crear un nuevo item
     public function nuevo()
     {
-        require 'models/articuloModel.php';
+        require 'models/ArticuloModel.php';
         $item = new ArticuloModel();
 
         $errores = array();

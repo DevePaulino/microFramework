@@ -85,7 +85,7 @@ class CategoriaController
     public function editar()
     {
 
-        require 'models/categoriaModel.php';
+        require 'models/CategoriaModel.php';
         $items = new CategoriaModel();
 
         // Recuperar el item con el código recibido
