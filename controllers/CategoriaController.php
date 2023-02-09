@@ -129,7 +129,7 @@ class CategoriaController
     public function borrar()
     {
 
-        require 'models/CategoriaModel.php';
+        require 'models/categoriaModel.php';
         $items = new CategoriaModel();
 
         // Recuperar el item con el código recibido
