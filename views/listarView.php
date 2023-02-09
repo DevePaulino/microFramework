@@ -21,9 +21,9 @@
         <tr>
             <td><?php echo $item->getCodigo() ?></td>
             <td><?php echo $item->getItem() ?></td>
-            <td><a href="index.php?controlador=Item&accion=editar&codigo=<?php echo $item->getCodigo() ?>">Editar</a>
+            <td><a href="index.php?controlador=item&accion=editar&codigo=<?php echo $item->getCodigo() ?>">Editar</a>
             </td>
-            <td><a href="index.php?controlador=Item&accion=borrar&codigo=<?php echo $item->getCodigo() ?>">Borrar</a>
+            <td><a href="index.php?controlador=item&accion=borrar&codigo=<?php echo $item->getCodigo() ?>">Borrar</a>
             </td>
 
         </tr>
