@@ -17,7 +17,7 @@ class ArticuloController
     public function listar()
     {
         //Incluye el modelo que corresponde
-        require 'models/articuloModel.php';
+        require 'models/ArticuloModel.php';
 
         //Creamos una instancia de nuestro "modelo"
         $items = new ArticuloModel();
@@ -86,7 +86,7 @@ class ArticuloController
     public function editar()
     {
 
-        require 'models/articuloModel.php';
+        require 'models/ArticuloModel.php';
         $items = new ArticuloModel();
 
         // Recuperar el item con el código recibido
@@ -130,7 +130,7 @@ class ArticuloController
     public function borrar()
     {
 
-        require 'models/articuloModel.php';
+        require 'models/ArticuloModel.php';
         $items = new ArticuloModel();
 
         // Recuperar el item con el código recibido

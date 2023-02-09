@@ -38,7 +38,7 @@ class CategoriaController
     public function index()
     {
         //Incluye el modelo que corresponde
-        require_once 'models/categoriaModel.php';
+        require_once 'models/CategoriaModel.php';
 
         //Creamos una instancia de nuestro "modelo"
         $items = new CategoriaModel();
@@ -56,7 +56,7 @@ class CategoriaController
     // Método del controlador para crear un nuevo item
     public function nuevo()
     {
-        require 'models/categoriaModel.php';
+        require 'models/CategoriaModel.php';
         $item = new CategoriaModel();
 
         $errores = array();
@@ -129,7 +129,7 @@ class CategoriaController
     public function borrar()
     {
 
-        require 'models/categoriaModel.php';
+        require 'models/CategoriaModel.php';
         $items = new CategoriaModel();
 
         // Recuperar el item con el código recibido
